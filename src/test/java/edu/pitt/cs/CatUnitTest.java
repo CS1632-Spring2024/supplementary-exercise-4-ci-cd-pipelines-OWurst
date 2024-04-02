@@ -31,7 +31,7 @@ public class CatUnitTest {
 		// Passing InstanceType.IMPL as the first parameter will create a real cat using your CatImpl implementation.
 		// Passing InstanceType.MOCK as the first parameter will create a mock cat using Mockito.
 		// Which type is the correct choice for this unit test?  I'll leave it up to you.  The answer is in the Unit Testing Part 2 lecture. :)
-		// TODO: Fill in
+		c = Cat.createInstance(InstanceType.IMPL, 1, "Jennyanydots");
 	}
 
 	@After
@@ -52,7 +52,7 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testGetId() {
-		// TODO: Fill in
+		assertEquals("failed id test", 1, c.getId());
 	}
 
 	/**
@@ -61,12 +61,12 @@ public class CatUnitTest {
 	 * <pre>
 	 * Preconditions: c has been created with ID 1, and name "Jennyanydots".
 	 * Execution steps: Call c.getName().
-	 * Postconditions: Return value is "Jennyanydots".
+	 * Postconditions: Return value is 1.
 	 * </pre>
 	 */
 	@Test
 	public void testGetName() {
-		// TODO: Fill in
+		assertEquals("failed get name", "Jennyanydots", c.getName());
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testGetRented() {
-		// TODO: Fill in
+		assertEquals("failed getrented", false, c.getRented());
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testToString() {
-		// TODO: Fill in
+		assertEquals("failed tostring", "ID 1. Jennyanydots", c.toString());
 	}
 
 	/**
@@ -109,7 +109,8 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testRentCat() {
-		// TODO: Fill in
+		c.rentCat();
+		assertEquals("failed rentcat", true, c.getRented());
 	}
 
 	/**
@@ -125,7 +126,8 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testReturnCat() {
-		// TODO: Fill in
+		c.returnCat();
+		assertEquals("faoled return cat", false, c.getRented());
 	}
 
 	/**
@@ -140,7 +142,9 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testRenameCat() {
-		// TODO: Fill in
+		c.renameCat("Garfield");
+		assertEquals("Garfield", c.getName());
+		assertEquals("ID 1. Garfield", c.toString());
 	}
 
 }

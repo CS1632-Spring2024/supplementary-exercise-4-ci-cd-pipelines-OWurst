@@ -18,8 +18,20 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public boolean returnCat(int id) {
-		// TODO: Fill in
-		return false;
+		Cat curr = getCat(id);
+
+		if(curr == null) {
+			return false;
+		}
+
+		if(curr.getRented()) {
+				curr.returnCat();
+				System.out.println("Welcome back, " + curr.getName() + "!");
+				return true;
+		} else {
+				System.out.println(curr.getName() + " is already here!");
+				return false;
+		}
 	}
 
 	/**
@@ -33,8 +45,19 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public boolean rentCat(int id) {
-		// TODO: Fill in
-		return false;
+		Cat curr = getCat(id);
+
+		if(curr == null) {
+			return false;
+		}
+
+		if(curr.getRented() == true) {
+			System.out.println("Sorry, " + curr.getName() + " is not here!");
+			return false;
+		}
+		System.out.println(curr.getName() + " has been rented.");
+		curr.rentCat();
+		return true;
 	}
 
 	/**
@@ -47,8 +70,19 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public boolean renameCat(int id, String name) {
-		// TODO: Fill in
-		return false;
+		Cat curr = getCat(id);
+
+		if(curr == null) {
+			return false;
+		}
+
+		try{
+			curr.renameCat(name);
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
 	}
 
 	/**
@@ -62,8 +96,16 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public String listCats() {
-		// TODO: Fill in
-		return "WRITE CODE FOR THIS";
+		String ret = "";
+
+		for(int i = 0; i < cats.size(); i++) {
+			Cat curr = cats.get(i);
+			if(!curr.getRented()) {
+				ret = ret + "ID " + curr.getId() + ". " + curr.getName() + "\n";
+			}
+		}
+
+		return ret;
 	}
 
 	/**
@@ -78,6 +120,11 @@ public class RentACatImpl implements RentACat {
 
 		// null check
 		if (cats == null) {
+			System.out.println("Invalid cat ID.");
+			return null;
+		}
+		if (cats.size() == 0){
+			System.out.println("Invalid cat ID.");
 			return null;
 		}
 
@@ -95,7 +142,6 @@ public class RentACatImpl implements RentACat {
 		// ID, then the cat is not in the list
 		System.out.println("Invalid cat ID.");
 		return null;
-
 	}
 
 	/**
